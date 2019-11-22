@@ -1,0 +1,14 @@
+Root Passwd Break.
+Restart the server and press up and down aero keys to stop the kernal before boot.
+select first option and press e for edit the system.
+press ctrl+e or end key of keyboard for go to last end the file.
+type there = rd.break selinux=0
+press ctrl+x  to start the server
+switch_root:/#mount -o remount rw /sysroot
+#chroot /sysroot  =  chroot command will make the root directory as any folder 
+#passwd root
+type new passwd
+Confirm passwd
+exit
+exit
+in this process system will start in rescue mode.

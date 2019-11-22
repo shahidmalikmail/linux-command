@@ -1,0 +1,210 @@
+RHEL 6 – setup
+RHEL 7 – nmtui
+
+RHEL 6 vs RHEL 7 – The Difference Between RHEL 6 and RHEL 7. Here Coding compiler sharing a blog post on key differences between RHEL 6 and RHEL 7. There are many changes from RHEL 6 to RHEL 7 to meet the industry requirements.
+
+RHEL 6 vs RHEL 7
+When compare RHEL 6 and RHEL 7, Red Hat Enterprise Linux 7 is a Linux-based operating system from Red Hat designed for businesses. RHEL can work on desktops, on servers, in hypervisors or in the cloud. RHEL 7 is very lightweight and container-based.
+
+Difference Between RHEL 6 And RHEL 7
+Let’s discuss the different features of RHEL 6 and RHEL 7.
+
+Related Article: Linux Administration Interview Questions
+
+Default File System
+RHEL 6 – Ext4
+RHEL 7 – XFS
+
+Kernel Version
+RHEL 6 – 2.6.xx
+RHEL 7 – 3.10.xx
+
+Release Name
+RHEL 6 – Santiago
+RHEL 7 – Maipo
+
+Gnome Version
+RHEL 6 – GNOME 2
+RHEL 7 – GNOME 3.8
+
+KDE Version
+RHEL 6 – KDE 4.1
+RHEL 7 – KDE 4.6
+
+NFS Version
+RHEL 6 – NFS 4
+RHEL 7 – NFS 4.1. NFS V2 is deprecated in RHEL 7
+
+Samba Version
+RHEL 6 – SMB 3.6
+RHEL 7 – SMB 4.4
+
+Default Database
+RHEL 6 – MySQL
+RHEL 7 – MariaDB
+
+Cluster Resource Manager
+RHEL 6 – Rgmanager
+RHEL 7 – Pacemaker
+
+Network Interface Grouping
+RHEL 6 – Bonding can be done as Active-Backup, XOR, IEEE and Load Balancing
+RHEL 7 – Team Driver will support multiple types of Teaming methods called Active-Backup, Load-balancing and Broadcast
+
+KDUMP
+RHEL 6 – Kdump does’t support with large RAM Size
+RHEL 7 – RHEL 7 can be supported up to 3TB
+
+Boot Loader
+RHEL 6 – Grub 2 /boot/grub2/grub.cfg
+RHEL 7 – Grub 0.97 /boot/grub/grub.conf
+
+File System Check
+RHEL 6 – e2fsck
+-Inode check. Block and size check
+–Directory Structure check
+-Directory Link Check
+-reference count check
+-Group Summary Check
+
+RHEL 7 – xfs_replair
+– Inode blockmap checks
+-Inode allocation map checks
+-Inode size check
+-Directory check
+-Path Name check
+-Link count check
+-Freemap check
+-Super block check
+
+Process ID
+RHEL 6 – Initd Process ID 1
+RHEL 7 – Systemd Process ID 1
+
+Port Security
+RHEL 6 – Iptables by default service port is enabled when service is switched on.
+RHEL 7 – Firewalld instead of iptables. Iptables can also support with RHEL 7, but we can’t use both of them at the same time. Firewall will not allow any port until and unless you enabled it.
+
+Boot Time
+RHEL 6 – 40 Sec
+RHEL 7 – 20 Sec
+
+File System Size
+RHEL 6 – EXT4 16TB with XFS 100TB
+RHEL 7 – XFS 500TB with EXT4 16TB
+
+Processor Architecture
+RHEL 6 – 32Bit and 64Bit
+RHEL 7 – Only 64Bit
+
+Network Configuration Tool
+RHEL 6 – setup
+RHEL 7 – nmtui
+
+Hostname Config File
+RHEL 6 – /etc/sysconfig/network
+RHEL 7 – /etc/hostname No need to edit hostname file to write permanent hostname simply use hostnamectl command
+
+Interface Name
+RHEL 6 – eth0
+RHEL 7 – ens33xxx
+
+Managing Services
+RHEL 6 – service sshd start
+service sshd restart
+chkconfig sshd on
+
+RHEL 7 – systemctl start sshd.service
+systemctl restart sshd.service
+systemctl enable sshd.service
+
+System Logs
+RHEL 6 – /var/log/
+RHEL 7 – /var/log
+journalctl
+
+Run Levels
+RHEL 6 – runlevel 0 – Power Off
+runlevel 1 – Single User Mode
+runlevel 2 – Multi User without Networking
+runlevel 3 – Multi User CLI
+runlevel 4 – Not USed
+runlevel 5 – GUI Mode
+runlevel 6 – Restart
+
+RHEL 7 – There is no run levels in RHEL 7. Run levels are called as targets
+Poweroff.target
+rescue.target
+multi-user.target
+graphical.target
+reboot.target
+
+UID Information
+RHEL 6 – Normal User UID will start from 500 to 65534
+System Users UID will start from 1 to 499
+
+RHEL 7 – Normal User UID start from 1000 – 65534
+System Users UID will start from 1 to 999Because Services are increased compare to RHEL 6
+
+By Pass Root Password Prompt
+RHEL 6 – append 1 or s or init=/bin/bash to Kernel command line
+RHEL 7 – Append rd.break or init=/bin/bash to kernel command line
+
+Rebooting and Poweroff
+RHEL 6 – poweroff – init 0
+reboot – init 6
+
+RHEL 7 – systemctl poweroff
+systemctl reboot
+
+YUM Commands
+RHEL 6 -yum groupinstall
+yum groupinfo
+
+RHEL 7 – yum group install
+yum group info
+
+Extracting Initramfs Image
+RHEL 6 – gunzip
+gunzip -c /boot/initramfs-$(uname -r).img | cpio -i -d
+
+RHEL 7 – skipcpio
+/usr/lib/dracut/skipcpio /boot/initramfs-$(uname -r).img | gunzip -c | cpio -id
+
+Default Inode Size
+RHEL 6 – 256 bytes
+
+[root@local ~]# tune2fs -l /dev/sda1|grep -i ‘inode size’
+
+Inode size: 128
+
+RHEL 7 – 512 bytes
+
+[root@managed1 ]# xfs_info /dev/sda1|grep isize
+
+meta-data=/dev/sda1 isize=512 agcount=4, agsize=65536 blks
+
+Iostat Command
+Now, in RHEL7.x there is a separate r_await (read await) & w_await (write await) added along with “await” which produces total (changed in sysstat version 10). It is just “await” parameter to get total average time in milliseconds which took to complete IO requests in case of RHEL6.x version.
+
+Network Persistent Device File
+RHEL 6 – maintains persistent in network/device
+RHEL 7 – maintains persistent in /etc/udev/rules.d/70-persistent-network.rules
+
+Free Command
+RHEL 6 – used = total – free
+RHEL 7 – used = total – free – buff/cache
+
+Resizing an Lvm
+RHEL 6 – EXT family of file systems could be resized if built on a logical volume as a block device.
+
+RHEL 7 – As with XFS file system, resize is not possible.
+
+Dmesg Command
+RHEL 6 – “dmesg” command belongs to “util-linux-ng” package and which by default doesn’t record time stamp and hence, data produced doesn’t state when those messages are generated.
+
+RHEL 7 – The new “util-linux” package to which “dmesg” command belongs to can print time-stamp along with messages as storaged in /var/log/dmesg. Now, users can print human readable kernel ring buffer messages using “dmesg -T” command. Most of the user utility commands under /bin are moved to /usr/bin in RHEL7.x architecture.
+
+Sources: Arkit | Simplylinuxfaq
+
+https://codingcompiler.com/difference-between-rhel-6-vs-rhel-7/ 

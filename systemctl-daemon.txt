@@ -1,0 +1,30 @@
+systemctl and daemon
+Syntx = command action service-name
+systemctl status nginx
+systemctl disable nginx   = permanant off
+systemctl enable nginx  = permanant on
+systemctl reload nginx  = changies update to kernal
+systemctl is-active nginx  = show the service status
+systemctl is-enabled nginx  = show the permanent status of service
+
+#######################################################################################
+Adjusting the System State
+There is 4 target is in Rhel which is mention below.
+1. graphical.target     = For genral use 
+2. multi-user.target  = For Command line use
+3. rescue.target    = For troubleshooting operation
+4. emergency.target  = For emergency operation.
+isolate will setup a tempraray target mode
+set-default  will setup a permanant target mode.
+#####################################################
+systemctl set-default graphical.target
+[root@rh ~]# systemctl isolate graphical.target   ====== set target mode tempraray and will run till restart the server.
+[root@rh ~]# systemctl isolate multi-user.target 
+[root@rh ~]# systemctl isolate rescue.target 
+[root@rh ~]# systemctl isolate emergency.target 
+systemctl get-default   == show the default target 
+systemctl set-default graphical.target  === set-default and permanant target mode.
+systemctl set-default multi-user.target     = for permanant set.
+systemctl list-units --type target  = Show the target list
+
+

@@ -1,0 +1,64 @@
+IAAS= Infrastructure as a Service 
+PAAS= Platform as a Service
+SAAS= Software as a Service
+# firewall-cmd --list-all  == Rhel 8 or Centos 8
+# firewall-cmd --zone=public --permanent --remove-service http
+# firewall-cmd --zone=public --permanent --remove-port 8080
+# firewall-cmd --reload
+# firewall-cmd --list-all
+
+# firewall-cmd --list-all
+# firewall-cmd --get-services
+# firewall-cmd --get-zones
+# firewall-cmd --zone=public --permanent --add-service=http
+# firewall-cmd --zone=public --permanent --add-port 8080/tcp
+# firewall-cmd --reload
+# firewall-cmd --list-all
+
+vim /etc/sudoers ======Go to bottom of the file and type this=====   noida, tom ALL=(ALL) ALL    ==== to add any user in sudoers file for sudo privilege
+delhi, tom ALL=(ALL) ALL
+vim /etc/sudoers ======Go to bottom of the file and type this=====   noida, tom ALL=(ALL) ALL    ==== to add any user in sudoers file for sudo privilege
+username, tom ALL=(ALL) ALL
+usermod -aG sudo username    ==== for add the user in sudo group
+usermod -aG wheel username   ====== for add the user in wheel group for run sudo command, it is default enabled in Centos.
+vim /etc/default/useradd  = default user configuration , can change his home directory etc.
+groupdel groupname   ==== for delete group 
+sudo groupadd -g 10000 students   ========== for Add new Group
+sudo tail /etc/group    = show the group
+sudo tail /etc/passwd    === show the users
+######################################################################################################
+pidof firefox   === Display the Process ID
+killall nginx  ==== Kill all process of Nginx
+pidof nginx  === Diskpal the PID of Nginx
+pidstat 80 (PID)   ==== Display the all informatics of PID.
+pgrep gnome   ===== Display the all PID of Gnome.
+tree 
+pstree  ===== Show the services as full graph
+ps -ef | grep nginx | wc -l  ====  Word Count list of nginx
+ps -ef | grep nginx  === Grep nginx PID
+ps -ef   === Show the all process ID
+ netstat | grep 80     ==== Show the Port no 80 Info
+locate shahid.txt   === show the location 
+locate folder-name-or-file-name === show the orignal location
+locate -i shahid
+
+#######################################################################
+Check Sum number is the unique number of the file , it never changed if we do copy , paste , move and rename the file but it change if we will do 
+any small or large change in the file then it will be changed.
+Linux default checksum is md5sum.
+1. cksum 2. md5sum 3. sha1sum 4. sha256sum 
+
+ 2003  md5sum submission.txt    ==== Linux Default checksum 
+ 2004  vim submission.txt
+ 2005  md5sum submission.txt
+ 2006  cksum submission.txt   ====== Basic checksum
+ 2007  vim submission.txt
+ 2008  cksum submission.txt
+ 2009  cksum --help
+ 2010  sha1sum submission.txt   ======== 2nd CheckSum
+ 2011  sha256sum submission.txt    ==========3rd Checksum
+################################################################################################
+
+
+
+

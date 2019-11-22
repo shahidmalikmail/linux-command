@@ -1,0 +1,79 @@
+Linux Rhel 7 or Linux User Management
+1. Root User
+2. System User
+3. Normal User
+Root UID=0 and GID=0
+System UID = 1-999 and GID =1-999  ( From Rhel 7 to current)
+User Config file = /etc/login.defs   ( We can increase and decrease the UID and GID)
+passwd
+group
+shadow
+gshadow
+grep root /etc/passwd 
+id root   = Show user UID and GID
+useradd shahid   = Create new user
+passwd shahid = Give passwd
+su - shahid  = for login user
+getent passwd root     = for user information just give command getent file user name
+useradd -c "IT Admin" shahid     = -c for give comment
+useradd -d /home/amiga/rnd/arhan arhan    = change user home directory
+useradd -s /sbin/nologin sunil    = User can not login in system
+useradd -c "HR" -d /home/amiga/suchee suchee  = can give multiple option on same time
+usermod -c "HR-Admin" suchee
+usermod = user modification 
+userdel -rf suchee = Delete user with profile data
+userdel arhan   = Delete only user not Data
+passwd -S aayat  = Check passwd status
+passwd -l aayat = Lock passwd
+passwd -u aayat = unlock passwd
+echo admin@123 | passwd --stdin aayat  = give passwd in single command , will use in linux scripting
+su - aayat = switch to aayat
+########################################################################################
+usermod -G root naziya ===== change users group
+groups naziya == check users group
+groupadd prod === add new group
+chgrp prod aayat == change folder group
+usermod -G prob naziya
+getent passwd naziya
+chown amiga:amiga folder or file name = change folder or file group.
+
+
+################################################################################################
+vim /etc/default/useradd  = default user configuration , can change his home directory etc.
+echo admin@123 | passwd --stdin aayat  = give passwd in single command , will use in linux scripting
+chage -l aayat = chage command user for user policy , chk user policy
+chage aayt = give new user passwd policy
+chage --help
+chage -W 10 aayat = give user exp date
+vim /etc/default/useradd = change default user configuration
+cd /etc/skel/ = new user will get data from this folder (all files and folder will be copied in to new user)
+####################################################################################################################
+vim /etc/sudoers ======Go to bottom of the file and type this=====   noida, tom ALL=(ALL) ALL    ==== to add any user in sudoers file for sudo privilege
+username, tom ALL=(ALL) ALL
+usermod -aG sudo username    ==== for add the user in sudo group
+usermod -aG wheel username   ====== for add the user in wheel group for run sudo command, it is default enabled in Centos.
+vim /etc/default/useradd  = default user configuration , can change his home directory etc.
+groupdel groupname   ==== for delete group 
+sudo groupadd -g 10000 students   ========== for Add new Group
+sudo tail /etc/group    = show the group
+sudo tail /etc/passwd    === show the users
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

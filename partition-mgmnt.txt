@@ -1,0 +1,134 @@
+We can create maximum 4 partition in linux in a one HDD.
+we can create min 1 and max 4 Primary partition.
+we can create min 0 and max 1 Extended partition.
+when we connected a new hard disk in linux then HDD will show as 
+sda, sdb, sdc, sdd and sdf etc.
+There is 2 types of Hard Disk Disk Drive.
+1. Sata and 2. Pata
+Sata HDD partition will show as sdb1, sdb2, sda1, sda2 etc. max 4 partitions.
+But we can create logical partition in extended partition "linux says that can create max 11 logical partition but Teacher says that he created max 57 logical partitions in a single extended partition.
+Pata HDD will show as hda, hdb,hdc and partition will be as show hdb1, hdb2, hda1 etc.
+Primary partition hexa code or id is 83 
+extended partition hexa code or id is 5
+Logical partition hexa code is also 83 but partition will be started from 5.
+Linux file system.
+ext2 ext3 ext4 , XFS and JFS and btrfs.
+vfat  filesystem will deduct in windows and linux both.
+
+###################################################################################################
+All HDD will show in linux in /dav partition.
+
+fdisk -l  = Check Partition
+lsblk   = For Hard Disk Check
+fdisk /dev/sda = go to new hard disk for partition management - We can add or delete partition and make primary and extended or logical partition.
+partprobe  = update all new HDD to OS or karnel, which is newly added , if we can reboot the server then it also will be updated.
+partprobe /dev/sda  = update to kernal specific one newly hdd.
+lsblk = check the HDD partition.
+blkid =check the partition is formatted or not.
+mkfs -t ext2 /dev/sda1 = make the partition or can give any file system.
+blkid = check the partition is formated or not.
+df -h = Check the size of folder and file and partition.
+mount /dev/sda1 /partition1   = Mount the partition with folder or root.
+umount /partition1/  = unmount the partition
+397  mount /dev/sda1 /part1
+  398  df -h
+  404  umount /part1/
+  405  umount /part1
+  411  blkid
+  412  mount /dev/sda1 /partition1
+  413  df -h
+  414  reboot
+   417  df -h /partition1
+  418  vim /etc/fstab = We can save permanent entry for mount and it will not remove after restart the server. below is mention sintax for entry.
+/dev/sda1       /partition1     ext2    defaults 0 0
+/dev/sda2       /partition2     ext3    defaults 0 0
+Also we can added mount in fstab file via UUID.
+ 420  mount -a  = it update the fstab entry to server, which is saved for permanent mount.
+ ### If we want to remove any HDD then we have to umount every partition and then delete partition after that we can remove that HDD.
+######################################################################################################################################
+LVM = Logical Volume Manager
+PV = Physical Volume
+VG = Volume Group
+LV = Logical Volume
+591  pvcreate -v /dev/sdb   = phyical voulume create - add new hdd to pv.
+  592  pvdisplay /dev/sdb == Display pv hdd.
+  593  pvs = show pv HDD.
+  594  pvcreate -v /dev/sdc == Create pv and add HDD.
+  595  pvs = show pv
+  596  pvdisplay  = show pv in details with meta data.
+  600  vgcreate volumecontainer /dev/sdb dev/sdc == Ceate Volume Group from multiple HDD.
+  603  vgs = Show Volume Group
+  604  pvs = Show Phyical Volume
+  605  pvcreate -v /dev/sdd == Add one more HDD in PV
+  606  pvs
+  607  vgs
+  608  vgextend volumecontainer /dev/sdd  = Increase the Volume Group.
+  609  vgs
+  609  vgreduce volumecontainer /dev/sdc  = Deactivate the HDD from Volume Group or remove the HDD.
+  610  pvs
+  611  lvs
+  612  lvcreate -L 12g -n mylv volumecontainer = Create the Logical Volume
+  613  lvs = Show logical volume
+  614  mkfs -t ext4 /dev/volumecontainer/mylv  = Format the Logical Volume.
+  615  blkid = Show volume.
+  616  mkdir /lv1 = Create a folder to mount LV.
+  617  vim /etc/fstab = Mount the LV 
+  618  mount -a = Refresh the mount
+  619  df -h = show folder size.
+  620  cp -rvf /etc/* /lv1
+  621  df -h
+  622  ls /lv1/
+626  lvextend -L +3G /dev/volumecontainer/mylv = LV size increase
+  627  df -h
+  628  resize2fs /dev/volumecontainer/mylv  = Assign file system to increased size of LV, like sync file system.
+  629  df -h
+  630  lvreduce -L -7G -r /dev/volumecontainer/mylv = decrease the LV size. -r automatically reduce the file system.
+  631  df -h
+  632  lvextend -L 20G -r /dev/volumecontainer/mylv 
+  633  df -h
+  634  lvreduce -L 5G -r /dev/volumecontainer/mylv 
+  635  lvs
+  636  df -h
+##############################################################################
+  637  lvresize -L 25G -r /dev/volumecontainer/mylv   ==== lvresize automatically increase or decrease the volume size as per need.
+  638  df -h
+  639  lvresize -L 15G /dev/volumecontainer/mylv 
+  640  df -h
+#########################################################################################################################################
+lvdisplay /dev/volumecontainer/mylv = show LV full details.
+Current LE =2048 Logical Extend
+vgdisplay volumecontainer
+PE Size = 4 MB Default but it can be go till 256MB.
+LVM = PE*LE = 8192 LE (8GB)
+
+vgreduce volumecontainer /dev/sdc  = Deactivate the HDD from Volume Group or remove the HDD.
+#vgcreate -s 16M myvg /dev/sdc  = to Create the VG with 16M PE
+#lvcreate -l 32 -n mylvm myvg = To Create LVM via LE
+[root@localhost ~]# lvremove /dev/shahid-container/hr      =======  Remove LV 
+[root@localhost ~]# vgremove shahid-container    ==== Remove VG
+[root@localhost ~]# pvremove /dev/sdc   ================ Remove PV
+lvreduce -L 3G /dev/dev-ops/aws-lvm  ===  Partition Size will be 3G
+lvreduce -L -1G /dev/dev-ops/aws-lvm ==== 1GB Reduce from current size
+resize2fs /dev/volumecontainer/mylv  = Assign file system to increased size of LV, like sync file system and it will update the lvm or partition
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

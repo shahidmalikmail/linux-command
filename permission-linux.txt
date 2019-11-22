@@ -1,0 +1,103 @@
+x = 1
+w = 2
+r = 4
+total permission is 7
+1. owner
+2. group
+3. others
+
+root user default folder permission is 755
+root user defaul file permission is 644
+
+normal user defaul folder permission is 775
+normal user defaul file permission is 664
+ls -l for file perrmission check
+ls -ld for folder permission check
+############################################
+symbolic permission setting
+u = user
+g = group
+p = others
+-+ = permission add or remove 
+chmod o=rwx aayat ===== change other permission on aayat folder
+ls -ld aayat === check permission 
+chmod u=r aayat
+chmod ugo=--- aayat
+chown adeeba aayat
+chmod ugo=rwx aayat
+chmod u=wrx,g=xr,o=xr aayat 
+usermod -G root naziya ===== change users group
+groups naziya == check users group
+groupadd prod === add new group
+chgrp prod aayat == change folder or file group
+usermod -G prob naziya
+getent passwd naziya
+chown amiga:amiga folder or file name = change folder or file group.
+chmod +r adeeba  === added read permission for all from this folder
+chmod -r adeeba  ==== removed read permission for all from this folder
+##########################################################################################
+ls -ll khora/  ==== show folder or file permission of all data, which is saved in folder
+mkdir khora/data{1..5}
+touch khora/file{1..5}.txt
+ls -ll khora/
+chmod 777 -R khora/  ======= change permission of all data which is saved in folder
+ls -ll khora/  ========
+groupadd delhi
+chgrp delhi -R khora ==== change group of all data which is saved in folder
+ls -ll khora/
+chown naziya -R khora/ ===  chnage owner of all data wich is saved in folder.
+ls -ll khora/
+chmod 755 khora  ===== for change the permission by numeric
+#########################################################################################
+Folder full permission is 777
+file full permission is 666
+root default umask value is 022
+user default umask value is 002
+umask = which value is mentioned in umas, that value minus from 777 or 666 then default permission will be applied 
+.bashrc = just type there usmask 000 , you will get full permisson on new file or folder.
+umask 000 = it will change as temp but when we close terminal then calue will be default.
+.bashrc file bydefault saved in user home directory.
+
+##################################################################################################
+ACL = Access Control List
+User base ACL and Group base ACL
+setfacl -m u:student:rwx data/   = we can give full permission to any specific users on target folder.
+setfacl -m u:amiga:r data 
+getfacl data = for check acl status. when acl is activated then showing plus simble 
+setfacl -x u:amiga: /data   ==== for remove amiga users from acl...
+setfacl -b /data  ====== to remove acl from this data folder.
+setfacl -m g:group:rwx data/   ==== acl activate on group on data folder
+setfacl -x g:group: /data =====  remove group from acl for data folder.
+getfacl -b /data/*  ===  remove group from acl 
+ls -ll adeeba/   == show access of all files, which is saved in folder
+-m = modify
+-u = user
+-x = remove single user or group
+-b = remove full acll
+#######################################################################
+setfacl -Rm g:group:rwx data/   ==== acl activate on group on data folder and all files also
+chown -R :group /folder  ==== change only group of folder all files. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

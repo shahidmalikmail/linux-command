@@ -1,0 +1,67 @@
+RPM =
+rpm -ivh firefox === install command.
+rpm -ev firefox  == remove command.
+741  rpm -qa  = Check all software packg in Redhat.
+  742  rpm -qa | wc -l  === Will count all packg.
+  743  rpm -qa firefox  === Check the firefox is installed or not
+  744  rpm -qa vsftpd ===
+  745  rpm -qa tar  === chk installed
+  746  firfox == Run firefox
+rpm -ev firefox  = Remove firefox or any other software. we can remove like this.
+cd /run/media/root/RHEL-8-0-0-BaseOS-x86_64/   = Go to CD Drive.
+rpm -Uvm packg-name  = for upgrade the software 
+rpm -Uvm packg-name --force   === install software forcefully.
+rpm -ivh targetpckg   = instal the software  
+rpm -ivh packname --nodeps   = install software without depandancies.
+##########################################################################
+cp -rvf /all rpm packg /softwarerpm 
+now we are going to create repodata 
+cd /etc/yum.repos.d/
+vim softwarerpm.repo
+[softwarerpm]
+name = softwarerpm
+baseurl = file:///softwarerpm
+enabled = 1
+gpgcheck = 0
+wq!
+yum clean all = we have to clean after make any repo file.
+
+yum repolist   = update the repolist
+
+
+yum-config-manager --add-repo=file:///shahidrpm  = For create the rpm config file.
+if we add some more packg in rpm directory.
+]#createrepo --update /softwarerepo
+
+
+ 899  yum list installed   = show all installed software list
+  900  yum info firefox  = show full info of software
+  901  yum install nginx  = install the software
+  902  yum reinstall firefox = reinstall the software
+  903  yum update firefox = update the software
+  904  yum remove firfox = remove the software
+  905  yum autoremove firfox = remove software with all depandancies.
+  906  yum install nfs-util
+  907  yum install nfs*  = install the full software
+  908  yum install java* 
+  909  yum history = show the yum history with unique id.
+  910  yum history info 4 == show about id no 4 , like what things installed or remove
+  911  yum history undo 5  = undo the operation id no 4
+  912  yum history redo 5  = redo the operation id no 5
+  913  cd /var/log/ = yum logs , where saved all info
+  914  tail -F yum.log  = show the current logs or old logs.
+  916  cat yum.log
+  917  tail yum search webserver   = search about webserver packg.
+  919  yum search ftp
+  920  yum search "ftp"  == seach about all ftp server pckg
+  922  yum search all "mail server" = seach about all mail server pkg.
+  923  yum search all "dns"
+  924  yum search all "proxy"
+service firewalld stop
+
+
+
+
+
+
+

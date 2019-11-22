@@ -1,0 +1,27 @@
+Grant Privileges to a MySQL User Account
+mysql -u root -p   For Login in mysql on terminal
+To grant specific privileges to a user account, you can use the following syntax:
+GRANT permission1, permission2 ON database_name.table_name TO 'database_user'@'localhost';
+
+Grand all privileges to a user account over a specific database:
+GRANT ALL PRIVILEGES ON database_name.* TO 'database_user'@'localhost';
+
+Grand all privileges to a user account over all databases:
+GRANT ALL PRIVILEGES ON *.* TO 'database_user'@'localhost';
+
+Grand all privileges to a user account over a specific table from a database:
+GRANT ALL PRIVILEGES ON database_name.table_name TO 'database_user'@'localhost';
+
+Grant multiple privileges to a user account over a specific database:
+GRANT SELECT, INSERT, DELETE ON database_name.* TO database_user@'localhost';
+
+Create a new MySQL User Account
+CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'user_password';
+
+To grant access from another host change the hostname part (localhost) with the remote machine IP. For example, to grant access from a machine with IP 10.8.0.5 you would run:
+CREATE USER 'newuser'@'10.8.0.5' IDENTIFIED BY 'user_password';
+
+CREATE DATABASE database_name;    (For CREATE any new database in mysql
+
+SELECT User,Host FROM mysql.user;       (For Show All users in mysql)
+

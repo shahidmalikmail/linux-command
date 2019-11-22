@@ -1,0 +1,27 @@
+Tar Command Syntax
+tar option archive-folder-name source data-file or folder
+1. zip  = it is best all of them
+2. gunzip
+3. bunzip
+4. zx
+tar -cvf shahid.tar /etc
+tar -tvf shahid.tar  = Chk content before extract
+tar -xvf shahid.tar   ==== Extract tar file on current directory.
+tar -xvf shahid.tar -C /home/amiga/find/ == For extract tar file.
+
+#################################################################
+tar -Jcvf shahid.tar.xz /etc
+zip amiga.zip /etc
+unzip amiga.zip
+zip shahid.zip /etc/*.*
+unzip shahid.zip
+tar -zcvf amiga.tar.gz /etc/
+tar -jcvf amiga.tar.bz2 /etc/
+tar -Jcvf amiga.tar.zx /etc/
+tar -Jcvf shahid.tar.xz /etc
+tar -Jxvf amiga.tar.zx  = For Extract
+tar -xvf amiga.tar.zx  = For Extract also like this
+
+du -sh * = Size check
+tar Jcvf shahid.tar /etc/   ==== We can create tar file also like this...
+

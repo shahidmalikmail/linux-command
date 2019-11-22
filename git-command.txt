@@ -1,0 +1,25 @@
+ 51  git init  === Start Git like monitoring 
+   52  git status
+   10 git config --global user.name "Shahid Malik"
+   11  git config --global user.email "shahidmalik.mail@gmail.com"
+   53  git add --a  === For add all files to git.
+   54  git status
+   55  git log
+   56  git commit -m "my first commit"
+   59  git add tensorflow/
+   60  git status
+   61  git commit -m "Amiga Website"
+   65  git commit -a   ===== Commit all files
+   13. git clone https://github.com/tensorflow/tensorflow.git ===  Clone the Reposistory
+  13. git clone https://github.com/tensorflow/tensorflow.git shahid ==== Clone will be renamed as shahid 
+########################################################################################   
+15.   touch error.log   == We can add file and folder name for ignore the git.
+   83  touch .gitignore
+    96  git add .  ==== Add all files or folder in Git
+   139  git diff  ====  Diffrence between same file like one file in added and another is not added.
+  146  git diff --staged   ====Diffrence between stage and current code.
+  162  git commit -a -m "Updated code" ===== Git add and Commit both on same time but it will never add new files to commit.
+   173  git rm --cached Domestic.xlsx  ===== File removed from tracker
+  174  git status
+
+
