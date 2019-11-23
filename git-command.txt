@@ -20,6 +20,39 @@
   146  git diff --staged   ====Diffrence between stage and current code.
   162  git commit -a -m "Updated code" ===== Git add and Commit both on same time but it will never add new files to commit.
    173  git rm --cached Domestic.xlsx  ===== File removed from tracker
-  174  git status
+  #############################################################################################################
+  git log   ==== Show all logs with log code
+  272  git log -p ===== Print all the log details like changies etc.
+  278  git log -p -2  ==== Print only last 2 log details.
+  280  git log -p -1
+  281  git log --stat  =====     Print all logs details like how many lince removed and how many lines added and modified.
+  282  git log --stat -2  =====  Print last 2 logs like above.
+  284  git log --stat -1  ======
+  285  git log --stat -2
+  287  git log --pretty=oneline   ===== Show the all details in one line.
+   290  git log --pretty=short
+  291  git log --pretty=full
+   295  git log --since=2.day ==== show the log details last 2 days.
+  296  git log --since=1 day
+  297  git log --since=1.day
+  298  git log --since=2.week
+  299  git log --since=2.months
+  302  git commit --amend  ===== Changies and new file added in last commit .
+  309  git log -p -1
+##################################################################################################################
+
+git restore --staged Abhinay.txt   ======== For back file from Stage Aeria 
+ git checkout -f  ==== Restore all repo from last commit
+git checkout Shahid.txt  ===== Restore one file from last commit.
+git restore Shahid.txt   =====  Restore one file or two files from last commit.
+################################################################################################################
+ git remote add origin https://github.com/shahidmalikmail/mailserver.git   ==== For add git reposistory
+git remote  == Check the remote 
+git remote -v === check the remote for push and pull
+git push -u origin master   ==== Push the data in to remote repo.
+git pull   ==== upto date Repo from Git Server  
+######################################################################################################################
+
+
 
 
