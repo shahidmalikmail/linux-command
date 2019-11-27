@@ -1,0 +1,6 @@
+zypper install apache2
+zypper update
+zypper-refresh
+# zypper repos or # zypper lr
+zypper remove apache2
+
