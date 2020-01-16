@@ -1,1 +1,3 @@
 yes > /dev/null &  To Make the High CPU Usage in Linux
+crontab -e    For Entry the Crontab
+its work like other editor press i for enter and wq! for save 
