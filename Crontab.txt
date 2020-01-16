@@ -1,0 +1,1 @@
+yes > /dev/null &  To Make the High CPU Usage in Linux
