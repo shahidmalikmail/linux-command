@@ -1,0 +1,3 @@
+https://docs.docker.com/install/linux/docker-ce/centos/
+docker container ls -a
+podman container ls -a

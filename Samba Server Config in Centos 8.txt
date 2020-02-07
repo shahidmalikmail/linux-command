@@ -1,0 +1,29 @@
+If you use the passdb backend = tdbsam default setting, Samba stores user accounts in the /var/lib/samba/private/passdb.tdb database.
+
+Procedure
+
+Create the operating system account:
+
+# useradd -M -s /sbin/nologin example
+This command adds the example account without creating a home directory. If the account is only used to authenticate to Samba, assign the /sbin/nologin command as shell to prevent the account from logging in locally.
+
+Set a password to the operating system account to enable it:
+
+# passwd example
+Enter new UNIX password: password
+Retype new UNIX password: password
+passwd: password updated successfully
+Samba does not use the password set on the operating system account to authenticate. However, you need to set a password to enable the account. If an account is disabled, Samba denies access if this user connects.
+
+Add the user to the Samba database and set a password to the account:
+
+# smbpasswd -a example
+New SMB password: password
+Retype new SMB password: password
+Added user example.
+Use this password to authenticate when using this account to connect to a Samba share.
+
+Enable the Samba account:
+
+# smbpasswd -e example
+Enabled user example.
