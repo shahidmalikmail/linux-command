@@ -1,3 +1,11 @@
 https://docs.docker.com/install/linux/docker-ce/centos/
 docker container ls -a
 podman container ls -a
+#vim daemon.json and save to /etc/docker  for Access the Registery server without ssl certificate.
+{
+        "insecure-registries" : ["54.210.49.121:5000"]
+}
+
+# http://54.210.49.121:5000/v2/_catalog  for check the registery server images.
+
+#
