@@ -52,6 +52,16 @@ git remote -v === check the remote for push and pull
 git push -u origin master   ==== Push the data in to remote repo.
 git pull   ==== upto date Repo from Git Server  
 ######################################################################################################################
+git config --global alias.st status   === for make the Alias
+git config --global alias.shahid add   ==== for make the Alias only for short cut
+###################################################################################################
+ 428  git branch   ===== Show the Git All Branches and Makred Star is current branch
+  429  git checkout -b development  ==== To Create the New Branch like Development.
+    440  git checkout master  ===== To Change the working branch.
+  442  git checkout development ===== To Change the working branch. We can see all data of that Branch where we switched.
+########################################################################################################################
+git merge development (Branch-Name) ===  To Merge the any branch but make you are in Master Branch for merge any Branch.
+
 
 
 
