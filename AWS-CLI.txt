@@ -1,0 +1,45 @@
+aws configure     = Configure a profile for Access key and Secret key
+Output format = table , json , 
+aws configure --profile shahid-user
+it will ask same things like access key and secret key.
+
+
+
+
+aws ec2 create-key-pair --key-name shahid-nvergina
+aws ec2 create-security-group --group-name Shahid-SG --description "My security group"
+
+aws ec2 create-image --instance-id i-1234567890abcdef0 --name "My server" --description "An AMI for my server"
+aws ec2 start-instances --instance-ids i-02cbafefc7140d308
+aws ec2 stop-instances --instance-ids i-02cbafefc7140d308
+aws ec2 reboot-instances --instance-ids i-02cbafefc7140d308
+aws ec2 terminate-instances --instance-ids i-02cbafefc7140d308
+aws ec2 create-tags --resources i-02cbafefc7140d308 --tags Key=Name,Value=MyInstance
+aws ec2 run-instances --image-id ami-09d069a04349dc3cb --count 1 --instance-type t2.micro --key-name nn --security-group-ids sg-0fed68e7d31972694 --subnet-id subnet-06d8118c7bb706519
+aws ec2 attach-volume --volume-id vol-1234567890abcdef0 --instance-id i-01474ef662b89480 --device /dev/sdf
+aws ec2 create-volume \
+    --volume-type gp2 \
+    --size 10 \
+    --availability-zone us-east-1a
+
+aws ec2 attach-volume --volume-id vol-0ac9ae989a4d23762 --instance-id i-02cbafefc7140d308 --device /dev/sdf
+ aws ec2 detach-volume --volume-id vol-0ac9ae989a4d23762 --instance-id i-02cbafefc7140d308 --device /dev/sdf
+aws ec2 delete-volume --volume-id vol-0ac9ae989a4d23762
+
+aws ec2 create-vpc \
+    --cidr-block 10.0.0.0/16
+aws ec2 delete-vpc --vpc-id vpc-a01106c2
+aws ec2 describe-account-attributes
+aws ec2 describe-addresses
+aws ec2 describe-availability-zones
+aws ec2 describe-images --image-ids i-02cbafefc7140d308
+aws ec2 describe-instances --instance-ids i-02cbafefc7140d308
+aws ec2 describe-instances --filters Name=instance-type,Values=m5.large
+aws ec2 describe-instances --filters "Name=tag-key,Values=Owner"
+aws ec2 describe-instances --filters "Name=tag-value,Values=my-team"
+aws ec2 describe-instances --filters "Name=tag:Owner,Values=my-team"
+aws ec2 describe-instances \
+    --filters Name=instance-type,Values=t2.micro,t3.micro Name=availability-zone,Values=us-east-2c
+
+
+

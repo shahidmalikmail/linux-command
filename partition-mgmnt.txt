@@ -110,6 +110,8 @@ vgreduce volumecontainer /dev/sdc  = Deactivate the HDD from Volume Group or rem
 lvreduce -L 3G /dev/dev-ops/aws-lvm  ===  Partition Size will be 3G
 lvreduce -L -1G /dev/dev-ops/aws-lvm ==== 1GB Reduce from current size
 resize2fs /dev/volumecontainer/mylv  = Assign file system to increased size of LV, like sync file system and it will update the lvm or partition
+#################################################################################################################################
+umount -f -l /dev/sdc  = Unmount forcefully
 
  
 

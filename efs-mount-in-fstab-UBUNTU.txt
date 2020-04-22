@@ -1,0 +1,10 @@
+Hi way2srinivas,
+There is an inaccuracy in the amazon-efs-utils installation documentation for deb packages. We will be addressing the documentation inaccuracy shortly. In the meantime, please use the following commands:
+sudo apt-get update
+sudo apt-get install -y git binutils make
+git clone https://github.com/aws/efs-utils
+cd efs-utils
+make deb
+sudo apt-get install -y ./build/amazon-efs-utils*deb
+Ian
+Amazon EFS Team

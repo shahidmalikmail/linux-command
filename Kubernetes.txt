@@ -1,2 +1,19 @@
-https://github.com/KamranAzeem/learn-kubernetes/blob/master/kubeadm/kubeadm-fedora-flannel.md
+https://github.com/KamranAzeem/learn-kubernetes/blob/master/kubeadm/kubeadm-fedora-flannel.md      Setup for VMWare Kubeadm Setup
 
+kubeadm token create --print-join-command
+
+kubeadm join 192.168.1.11:6443 --token zd5asm.yxyl3cyxdbpda7u4     --discovery-token-ca-cert-hash sha256:6b970bc70c6391dc800b8ad47735efc038707642f5f47ca2805d4e43a28cb2d6 
+https://github.com/ValaxyTech/DevOpsDemos/blob/master/Kubernetes/k8s-setup.md         Kubernetes setup on AWS
+
+		
+		###################
+# REBOOTING ISSUE #
+###################
+# At the time of writing this, rebooting causes kubernetes to no longer work. This will fix it (http://stytex.de/blog/2018/01/16/how-to-recover-self-hosted-kubeadm-kubernetes-cluster-after-reboot/)
+git clone https://github.com/xetys/k8s-self-hosted-recovery
+cd k8s-self-hosted-recovery
+chmod +x install.sh
+./install.sh
+cd ..
+		
+		

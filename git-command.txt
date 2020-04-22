@@ -61,7 +61,11 @@ git config --global alias.shahid add   ==== for make the Alias only for short cu
   442  git checkout development ===== To Change the working branch. We can see all data of that Branch where we switched.
 ########################################################################################################################
 git merge development (Branch-Name) ===  To Merge the any branch but make you are in Master Branch for merge any Branch.
+<<<<<<< HEAD
 
+=======
+##############################################################
+>>>>>>> 007b4b14dde12500db243430402f40232ea7c7c6
 
 
 

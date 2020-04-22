@@ -1,0 +1,141 @@
+#ansible all --list-hosts
+#ansible --version  = show default config 
+#export ANSIBLE_CONFIG=/home/arhaan/amiga/ansible.cfg    = Set the Invirment Verible for change the config for temp
+#export ANSIBLE_CONFIG=/home/arhaan/amiga/ansible.cfg    = add this in user home .bashrc file for change the Ansible Config.
+#cp /etc/ansible/ansible.cfg /home/adeeba  = copy this file and save to users home profile for change the default config.
+#unset ANSIBLE_CONFIG  = for unset Invirment verible .
+#########################################################################
+ 187  ansible db -m copy -a "src=/etc/passwd dest=/tmp"
+  188  ansible -m copy db -a "src=/etc/group dest=/tmp owner=aws group=azur mode=777"
+   190  ansible db -m copy -a "src=/etc/group dest=/tmp"
+  191  ansible db -m copy -a "src=/etc/group dest=/tmp backup=yes"
+  193  ansible db -m copy -a "src=/etc/group dest=/tmp backup=yes"
+  194  ansible db -m copy -a "src=/khora remote_src=yes dest=/tmp backup=yes"
+  195  ansible db -m copy -a "src=/khora/shahid1 remote_src=yes dest=/tmp backup=yes"
+  196  ansible db -m copy -a "src=/khora/* remote_src=yes dest=/tmp backup=yes"
+  197  ansible db -m copy -a "src=/khora/*.* remote_src=yes dest=/tmp backup=yes"
+  198  ansible db -m copy -a "src=/khora/ remote_src=yes dest=/tmp backup=yes"
+  199  ansible db -m copy -a "content="Welcome to Adeeba and Aayat and Arhaan Malik" dest=/tmp/aayat.txt"
+  200  ansible db -m copy -a "content='Welcome to Adeeba and Aayat and Arhaan Malik' dest=/tmp/aayat.txt"
+  201  ansible-doc copy
+  212  ansible web -m copy -a "src=/root/amiga dest=/khora"
+  213  ansible web -m copy -a "src=/root/amiga dest=/khora backup=yes"
+  217  ansible web -m copy -a "src=/root/amiga dest=/khora backup=yes"
+ #############################################################################
+ ansible db -m fetch -a "src=/var/log/yum.log dest=/root/logs/"       Fetch models fetch the data from remote machine to master 
+ ansible db -m fetch -a "src=/etc/passwd dest=/root/logs"
+#######################################################################
+ 260  ansible db -m file -a 'path=/tmp/india state=directory'
+  261  ansible db -m file -a 'path=/tmp/delhi.txt state=touch'
+  262  ansible db -m file -a 'path=/tmp/india2 state=directory'
+    265  ansible db -m file -a 'path=/tmp/ mode=777'
+  266  ansible db -m file -a 'path=/tmp/india state=absent'
+  267  ansible db -m file -a 'path=/tmp/india2 state=absent'
+  268  ansible db -m file -a 'path=/tmp/delhi.txt state=absent'
+    271  ansible db -m file -a 'src=/etc/passwd dest=/tmp/newlink state=link'
+  272  ansible db -m file -a 'src=/etc/passwd dest=/tmp/newlink state=hard'
+  273  ansible db -m file -a 'src=/etc/passwd dest=/tmp/newlink2 state=hard'
+############################################################################
+290  vim myscript.sh 
+  291  ansible web -m copy -a 'src=/root/myscript.sh dest=/tmp'
+  292  ansible web -m shell -a 'sh /tmp/myscript.sh'
+#########################################################
+296  ansible web -m package -a 'name=httpd state=present'
+  297  ansible web -m package -a 'name=httpd state=absent'
+  298  ansible web -m package -a 'name=nfs* state=installed'
+  299  ansible web -m package -a 'name=httpd* state=installed'
+  300  ansible web -m package -a 'name=httpd* state=removed'
+  301  ansible web -m package -a 'name=httpd state=installed'
+  302  ansible web -m package -a 'name=httpd state=remove'
+  303  ansible web -m package -a 'name=httpd state=removed'
+  304  ansible web -m package -a 'name=httpd state=installed use=yum'
+  305  ansible web -m package -a 'name=httpd state=removed use=yum'
+  306  ansible web -m package -a 'name=httpd state=latest use=yum'
+  307  ansible web -m package -a 'name=httpd state=removed use=yum'
+########################################################################
+182  ansible db -m yum_repository -a 'name=yum-server description="this is my first yum server" file=my_yum_server baseurl=https://download.fedoraproject.org/pub/epel/$releasever/$basearch/ gpgcheck=no enabled=yes'
+  183  ansible db -m yum_repository -a 'name=yum-server state=absent file=my_yum_server'
+#######################################################################################################################################
+191  ansible db -m yum -a 'name=httpd state=present'
+  192  ansible db -m yum -a 'name=httpd state=absent'
+  193  ansible db -m yum -a 'list=http'
+  194  ansible db -m yum -a 'list=httpd'
+  195  ansible db -m yum -a 'name=httpd state=present'
+  196  ansible web -m yum -a 'list=httpd'
+  197  ansible web -m yum -a 'list=tree'
+  198  ansible db -m yum -a 'name=tree state=present'
+  199  ansible db -m yum -a 'list=tree'
+  200  ansible db -m yum -a 'list=nginx'
+  201  ansible db -m yum -a 'name=nginx state=present'
+  202  ansible db -m yum -a 'list=nginx'
+  203  ansible db -m yum -a 'name=nginx state=absent'
+  204  ansible db -m yum -a 'name=httpd state=absent'
+  205  ansible db -m yum -a 'name=http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm state=present'
+  206  ansible db -m yum -a 'name=http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm state=absent'
+  207  ansible db -m yum -a 'name=nginx state=absent'
+  208  ansible db -m yum -a 'name="*" state=latest'
+  209  ansible db -m yum -a 'name="*" exclude=kernel*,httpd state=latest'
+####################################################################################################
+213  ansible db -m service -a "httpd=started"
+  214  ansible db -m service -a "name=httpd state=started"
+  215  ansible db -m yum -a "name=httpd state=installed"
+  216  ansible db -m service -a "name=httpd state=started"
+  217  ansible db -m service -a "name=httpd state=stoped"
+  218  ansible db -m service -a "name=httpd state=stopped"
+  219  ansible db -m service -a "name=httpd enabled=yes"
+  220  ansible db -m service -a "name=httpd state=started enabled=yes"
+  223  ansible db -m service -a "name=httpd state=reloaded"
+############################################################################################################################
+225  ansible web -m group -a "name=wipro state=present"
+  226  ansible web -m group -a "name=tcs state=present"
+  227  ansible db -m user -a "name=ludo group=wipro"
+  228  ansible db -m user -a "name=ludo group=wipro comment="Ludo Farzi Khel""
+  229  ansible db -m user -a "name=ludo group=wipro comment='Ludo Farzi Khel'"
+  230  ansible db -m user -a "name=laddu-singh group=wipro,tcp comment='Software Engineer'"
+  231  ansible db -m user -a "name=laddu-singh group=wipro,tcs comment='Software Engineer'"
+  232  ansible db -m user -a "name=laddu-singh groups=wipro,tcs comment='Software Engineer'"
+  233  ansible db -m user -a "name=laddu-singh state=absent"
+  234  ansible db -m user -a "name=laddu-singh state=absent remove=yes"
+  235  ansible db -m user -a "name=ludo state=absent remove=yes"
+  240  ansible db -m user -a 'name=shahid generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file=.ssh/id_rsa'
+  241  ansible db -m user -a "name=laddu-singh shell=/sbin/nologin groups=wipro,tcs comment='Software Engineer'"
+  #####################################################################################################################
+  248  ansible db -m lineinfile -a 'path=/etc/sudoers line='shahid ALL=(All) ALL'
+  249  ansible db -m lineinfile -a 'path=/etc/sudoers line='shahid ALL=(All) ALL''
+  250  ansible db -m lineinfile -a 'path=/etc/sudoers line='shahid ALL=(ALL) ALL''
+  251  ansible db -m lineinfile -a "path=/etc/sudoers line='shahid ALL=(ALL) ALL'"
+  252  ansible db -m lineinfile -a "path=/etc/sudoers line='shahid ALL=(ALL) ALL' state=absent"
+  253  ansible db -m lineinfile -a "path=/etc/sudoers line='shahid ALL=(ALL) ALL' insertafter=BOF"
+  254  ansible db -m lineinfile -a "path=/etc/sudoers line='shahid ALL=(ALL) ALL' insertafter=BOF state=absent"
+  255  ansible db -m lineinfile -a "path=/etc/sudoers line='shahid ALL=(ALL) ALL' insertafter=EOF"
+  256  ansible db -m lineinfile -a "path=/etc/sudoers line='shahid ALL=(ALL) ALL' insertafter=EOF state=absent"
+  257  ansible db -m lineinfile -a "path=/etc/sudoers line='shahid ALL=(ALL) ALL' insertafter=MOF"
+  258  ansible db -m lineinfile -a "path=/etc/sudoers line='shahid ALL=(ALL) ALL' insertafter=MOF state=absent"
+  259  ansible web -m lineinfile -a "path=/etc/sudoers line='shahid ALL=(ALL) ALL' insertafter="^root""
+  260  ansible web -m lineinfile -a "path=/etc/sudoers line='shahid ALL=(ALL) ALL' insertbefore="^root""
+  261  ansible web -m lineinfile -a "path=/etc/sudoers line='shahid ALL=(ALL) ALL' insertbefore="^root" state=absent"
+  262* ansible web -m lineinfile -a "path=/etc/sudoers line='shahid ALL=(ALL) ALL' regexp="^root""
+  263  ansible web -m lineinfile -a "path=/etc/sudoers line='shahid ALL=(ALL) ALL' insertbefore="^root"state=absent"
+  264  ansible web -m lineinfile -a "path=/etc/sudoers line='shahid ALL=(ALL) ALL' insertbefore="^root" state=absent"
+  265  ansible web -m lineinfile -a "path=/etc/sudoers line='shahid ALL=(ALL) ALL' insertafter="^root""
+  266  ansible web -m lineinfile -a "path=/etc/sudoers line='adeeba ALL=(ALL) ALL' regexp="^shahid""
+  267  ansible web -m lineinfile -a "path=/etc/sudoers regexp="^shahid" state=absent"
+  268  ansible web -m lineinfile -a "path=/etc/sudoers regexp="^adeeba" state=absent"
+  269  ansible web -m lineinfile -a "path=/etc/sudoers regexp="^## Allows" state=absent"
+  270  ansible web -m lineinfile -a "path=/etc/sudoers regexp="^# includedir" state=absent"
+  271  ansible web -m lineinfile -a 'path=/etc/sudoers regexp="^# includedir" state=absent'
+  272  ansible web -m lineinfile -a 'path=/etc/sudoers regexp="^## cdrom" state=absent'
+  273  ansible web -m lineinfile -a 'path=etc/selinux/config regexp="^SELINUX" line="SELINUX=disabled"'
+  274  ansible db -m lineinfile -a 'path=etc/selinux/config regexp="^SELINUX" line="SELINUX=disabled"'
+  275  ansible db -m lineinfile -a 'path=/etc/selinux/config regexp="^SELINUX" line="SELINUX=disabled"'
+  276  ansible db -m lineinfile -a 'path=/etc/selinux/config regexp="^SELINUX" line="SELINUX=disabled" state=absent'
+  277  ansible db -m lineinfile -a 'path=/etc/selinux/config regexp="^SELINUX=" line="SELINUX=disabled"'
+  278  ansible db -m lineinfile -a 'path=/etc/selinux/config regexp="^SELINUX=" line="SELINUX=enforcing"'
+  279  ansible db -m lineinfile -a 'path=/etc/selinux/config line="SELINUX=enforcing"'
+  280  ansible db -m lineinfile -a 'path=/etc/selinux/config line="SELINUX=enforcing" insterafter=EOF'
+  281  ansible db -m lineinfile -a 'path=/etc/selinux/config line="SELINUX=enforcing" insertafter=EOF'
+  282  ansible db -m lineinfile -a 'path=/etc/selinux/config line="SELINUX=enforcing" insertafter=MOF'
+  283  ansible db -m lineinfile -a 'path=/etc/selinux/config line="SELINUXTYPE=targeted" insertafter=EOF'
+######################################################################################################################################
+
+

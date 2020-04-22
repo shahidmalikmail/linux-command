@@ -58,6 +58,7 @@ Linux default checksum is md5sum.
  2010  sha1sum submission.txt   ======== 2nd CheckSum
  2011  sha256sum submission.txt    ==========3rd Checksum
 ################################################################################################
+  yes > /dev/null &  To Make the High CPU Usage in Linux
 
 
 
