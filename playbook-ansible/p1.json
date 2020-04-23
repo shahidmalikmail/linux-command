@@ -1,0 +1,34 @@
+[
+  {
+    "hosts": "db",
+    "tasks": [
+      {
+        "copy": {
+          "src": "/etc/passwd",
+          "dest": "/tmp/",
+          "owner": "shahid",
+          "group": "shahid",
+          "mode": 777
+        }
+      },
+      {
+        "file": {
+          "path": "/tmp/ansible",
+          "state": "directory"
+        }
+      },
+      {
+        "yum": {
+          "name": "httpd",
+          "state": "latest"
+        }
+      },
+      {
+        "service": {
+          "name": "httpd",
+          "state": "started"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+[
+  {
+    "hosts": "web",
+    "tasks": [
+      {
+        "copy": "src=/etc/shadow dest=/tmp/azure owner=shahid group=shahid mode=777"
+      },
+      {
+        "file": "path=/tmp/azure state=directory"
+      },
+      {
+        "yum": "name=nfs-utils state=present"
+      },
+      {
+        "service": "name=nfs-server state=started"
+      }
+    ]
+  }
+]

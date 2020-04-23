@@ -1,0 +1,19 @@
+[
+  {
+    "hosts": "web",
+    "tasks": [
+      {
+        "copy": "src=/etc/group dest=/tmp"
+      },
+      {
+        "file": "path=/tmp/aws state=directory"
+      },
+      {
+        "yum": "name=wget state=present"
+      },
+      {
+        "service": "name=httpd state=restarted"
+      }
+    ]
+  }
+]
