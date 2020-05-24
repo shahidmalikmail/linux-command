@@ -1,0 +1,204 @@
+- hosts: localhost
+  connection: local
+  gather_facts: yes
+  vars:
+  - vpc_region: ap-south-1
+  - key_pair: ansible-key
+  
+  tasks:
+  - name: create VPC for Ansible
+    ec2_vpc_net:
+      name: ansibleVPC
+      state: present
+      cidr_block: 172.32.0.0/16
+      region: "{{ vpc_region }}"
+    register: ansibleVPC
+      
+  - name: display ansibleVPC results
+    debug: var=ansibleVPC
+  
+  - name: create internet gateway for ansibleVPC
+    ec2_vpc_igw:
+      state: present
+      region: "{{ vpc_region }}"
+      vpc_id: "{{ ansibleVPC.vpc.id }}"
+      tags:
+        Name: ansibleVPC_IGW     
+    register: ansibleVPC_igw
+
+  - name: display ansibleVPC IGW details
+    debug: var=ansibleVPC_igw
+
+  - name: obtain all AZ present in region {{ vpc_region }}
+    aws_az_facts:
+      region: "{{ vpc_region }}"
+    register: az_in_region
+  
+  - name: display all AZ present in region {{ vpc_region }}
+    debug: var=az_in_region
+  
+  #create public subnet in first az and private subnet in second az
+  - name: display AZ that will be used for public and private Subnets
+    debug:
+      msg:
+        - "public subnet in AZ: {{ az_in_region.availability_zones[0].zone_name }}"
+        - "private subnet in AZ: {{ az_in_region.availability_zones[1].zone_name }}"
+  
+  - name: create public subnet in AZ {{ az_in_region.availability_zones[0].zone_name }}
+    ec2_vpc_subnet:
+      state: present
+      cidr: 172.32.1.0/24
+      az: "{{ az_in_region.availability_zones[0].zone_name }}"
+      vpc_id: "{{ ansibleVPC.vpc.id }}"
+      region: "{{ vpc_region }}"
+      map_public: yes
+      tags:
+        Name: public subnet
+    register: public_subnet
+
+  - name: show public subnet details
+    debug: var=public_subnet
+
+  - name: create private subnet-1 in Availability Zone AP-South-1A
+    ec2_vpc_subnet:
+      state: present
+      cidr: 172.32.2.0/24
+      az: ap-south-1a
+      vpc_id: "{{ ansibleVPC.vpc.id }}"
+      region: "{{ vpc_region }}"
+      resource_tags:
+        Name: private subnet-1
+    register: private_subnet_1
+
+  - name: show private subnet details
+    debug:  var=private_subnet_1
+
+  - name: create private subnet-2 in in Availability Zone AP-South-1B
+    ec2_vpc_subnet:
+      state: present
+      cidr: 172.32.3.0/24
+      az: ap-south-1b
+      vpc_id: "{{ ansibleVPC.vpc.id }}"
+      region: "{{ vpc_region }}"
+      resource_tags:
+        Name: private subnet-2
+    register: private_subnet_2
+
+  - name: show private subnet-2 details
+    debug:  var=private_subnet_2
+  
+  - name: Build RDS Subnet Group
+    rds_subnet_group:
+      region: "{{ vpc_region }}"
+      state: present
+      name: db_subnet
+      description: Subnet Group for DB Server
+      subnets:
+        - "{{ private_subnet_1.subnet.id }}"
+        - "{{ private_subnet_2.subnet.id }}"
+    register: db_subnet_group
+  - name: show db subnet group details
+    debug:
+      var: db_subnet_group
+
+
+  - name: create new route table for public subnet
+    ec2_vpc_route_table:
+      state: present
+      region: "{{ vpc_region }}"
+      vpc_id: "{{ ansibleVPC.vpc.id }}"
+      tags:
+        Name: rt_ansibleVPC_PublicSubnet
+      subnets:
+        - "{{ public_subnet.subnet.id }}"
+      routes:
+        - dest: 0.0.0.0/0
+          gateway_id: "{{ ansibleVPC_igw.gateway_id }}"
+    register: rt_ansibleVPC_PublicSubnet
+
+  - name: display public route table
+    debug: var=rt_ansibleVPC_PublicSubnet
+
+  - name: create a security group for dockerhost
+    ec2_group:
+      state: present
+      name: sg_ansibleVPC_publicsubnet_dockerhost
+      description: security group for dockerhost within the public subnet of ansible VPC
+      vpc_id: "{{ ansibleVPC.vpc.id }}"
+      region: "{{ vpc_region }}"
+      rules:
+        - proto: tcp
+          ports:
+            - 22
+            - 80
+          cidr_ip: 0.0.0.0/0
+          rule_desc: allow ssh to dockerhost
+    register: sg_ansibleVPC_publicsubnet_dockerhost
+
+  - name: display details for dockerhost security group
+    debug: var=sg_ansibleVPC_publicsubnet_dockerhost 
+
+  - name: deploy a Docker Container Server
+    ec2:
+      key_name: "{{ key_pair }}"
+      instance_type: t2.micro
+      image: ami-005956c5f0f757d37
+      user_data: |
+                 #!/bin/sh
+                 sudo yum install docker* -y
+                 sudo service docker start
+                 sudo service docker enable
+                 sudo docker pull httpd
+                 sudo docker run --name=web-svr -p 80:80 -d httpd
+      group_id: "{{ sg_ansibleVPC_publicsubnet_dockerhost.group_id }}"
+      vpc_subnet_id: "{{ public_subnet.subnet.id }}"
+      assign_public_ip: yes
+      region: "{{ vpc_region }}"
+      instance_tags:
+        Name: Docker_Server
+      count_tag:
+        Name: Docker_Server
+      exact_count: 1
+    register: docker_server
+
+  - name: display details for Docker Container Server
+    debug: var=docker_server
+
+  #create a security group for the private subnet which allows restricted access from public subnet
+  - name: create a security group for servers in private subnet with only tcp 3306
+    ec2_group:
+      state: present
+      name: sg_ansibleVPC_privatesubnet_servers
+      description: security group for private subnet that allows limited access from public subnet
+      vpc_id: "{{ ansibleVPC.vpc.id }}"
+      region: "{{ vpc_region }}"
+      rules:
+        - proto: tcp
+          ports: 3306
+          group_name: sg_ansibleVPC_publicsubnet_dockerhost
+          rule_desc: allow only database access from public to private subnet servers
+    register: sg_ansibleVPC_privatesubnet_servers
+
+  - name: display details for private subnet security group
+    debug: var=sg_ansibleVPC_privatesubnet_servers
+
+  - name: deploy a RDS with MYSQL Server in private subnet
+    rds:
+      command: create
+      instance_name: Prod-DB
+      db_engine: MySQL
+      engine_version: 8.0.17
+      size: 10
+      instance_type: db.t2.micro
+      username: mysql_admin 
+      password: Adminamiga
+      region: "{{ vpc_region }}"
+      subnet: db_subnet
+      vpc_security_groups: "{{ sg_ansibleVPC_privatesubnet_servers.group_id }}"
+      tags:
+        Environment: testing
+        Application: cms
+    register: rds
+
+  - name: display details for RDS Mysql server in private subnet
+    debug: var=rds

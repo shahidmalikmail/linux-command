@@ -1,0 +1,5 @@
+- hosts: laptop
+  tasks:
+    - copy:
+        src: /root/playbook
+        dest: /home/amiga/linux-command/laptop-command
