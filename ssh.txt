@@ -1,2 +1,3 @@
 #ssh-keygen    For Genrate the ssh keygen
 #ssh-copy-id -i root@192.168.1.8      For ssh without password.
+#hostnamectl set-hostname worker-1    For change the hostname permanantly
