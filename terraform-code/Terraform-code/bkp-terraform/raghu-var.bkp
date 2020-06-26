@@ -1,0 +1,54 @@
+##############################################################################################################################################
+#############################################################################################################################################
+ 		#	Raghuvendra-Website-Script-Ubuntu-1-Instance-Variable-File	#
+#############################################################################################################################################
+############################################################################################################################################
+
+
+provider "aws" {
+region = "ap-south-1"
+access_key = "AKIA52AYX2SRMOHV2JND"
+secret_key = "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"
+}
+
+
+variable "vpc_id" {
+default = "vpc-6542780d"
+}
+
+variable "subnet_id" {
+default = "subnet-9a6ffed6"
+}
+
+variable "security_group" {
+default = "sg-1da35273"
+}
+
+variable "key_path" {
+default = "/home/multisolutionservices.pem"
+}
+
+variable "key_name" {
+default = "multisolutionservices"
+}
+
+variable "ami_id" {
+default = "ami-009110a2bf8d7dd0a"
+}
+
+variable "instance_type" {
+default = "t2.micro"
+}
+
+variable "volume_type" {
+default = "gp2"
+}
+
+variable "volume_size" {
+default = "8"
+}
+
+variable "count" { 
+default = "1"
+}
+
