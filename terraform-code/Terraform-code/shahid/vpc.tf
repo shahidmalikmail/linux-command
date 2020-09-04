@@ -26,7 +26,7 @@ resource "aws_subnet" "public" {
   }
 }
 
-# Route table: attach Internet Gateway 
+###Route table: attach Internet Gateway 
 resource "aws_route_table" "public_rt" {
   vpc_id = "${aws_vpc.terra_vpc.id}"
   route {
