@@ -26,10 +26,15 @@ services:
             - "80:80"
         restart: always
         environment:
-         WORDPRESS_DB_HOST: db:3306
-         WORDPRESS_DB_USER: tothenew
-         WORDPRESS_DB_PASSWORD: tothenew@2021
-         WORDPRESS_DB_NAME: tothenewdb
+            WORDPRESS_DB_HOST: db:3306
+            WORDPRESS_DB_USER: tothenew
+            WORDPRESS_DB_PASSWORD: tothenew@2021
+            WORDPRESS_DB_NAME: tothenewdb
+        healthcheck:
+            test: curl --fail -s http://localhost:80/ || exit 1
+            interval: 1m30s
+            timeout: 10s
+            retries: 3 
 
 volumes:
     db_data: {}
